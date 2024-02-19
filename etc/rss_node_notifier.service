@@ -1,0 +1,15 @@
+[Unit]
+Description="Self Hosted Dashboard"
+
+[Service]
+ExecStart=/usr/bin/node server.js
+WorkingDirectory=/project/absolute/path
+Restart=always
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=SelfHostedDashboard
+Environment=NODE_ENV=production PORT=5000
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,49 @@
+{
+  "name": "rss_node_notifier",
+  "version": "1.0.0",
+  "description": "A lightweight NodeJS RSS notifier written in TypeScript",
+  "main": "dist/app.js",
+  "type": "module",
+  "scripts": {
+    "start": "tsc && node --env-file=.env dist/app.js",
+    "test": "nyc mocha",
+    "testy": "nyc mocha --recursive --exit --require source-map-support/register --require ts-node/register/transpile-only",
+    "build": "tsc && npm run copy",
+    "lint": "eslint . --ext .ts",
+    "format": "prettier . --write",
+    "copy": "cp .env package.json package-lock.json etc/rss_node_notifier.service ./dist"
+  },
+  "precommit": [
+    "format",
+    "lint"
+  ],
+  "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "^1.0.2",
+    "@types/chai": "^4.3.11",
+    "@types/mocha": "^10.0.6",
+    "@types/sinon": "^17.0.3",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "chai": "^5.1.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.56.0",
+    "eslint-config-standard-with-typescript": "^43.0.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-promise": "^6.1.1",
+    "mocha": "^10.3.0",
+    "nyc": "^15.1.0",
+    "precommit": "^1.2.2",
+    "prettier": "^3.2.5",
+    "prettier-plugin-organize-imports": "^3.2.4",
+    "sinon": "^17.0.1",
+    "source-map-support": "^0.5.21",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "axios": "^1.6.7",
+    "fast-xml-parser": "^4.3.4"
+  },
+  "author": "awtrimpe",
+  "license": "MIT"
+}
