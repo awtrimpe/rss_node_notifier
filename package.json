@@ -45,5 +45,5 @@
     "fast-xml-parser": "^4.3.4"
   },
   "author": "awtrimpe",
-  "license": "MIT"
+  "license": "AGPL-3.0-or-later"
 }
