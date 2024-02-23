@@ -13,8 +13,9 @@
     "baseUrl": ".",
     "allowSyntheticDefaultImports": true,
     "paths": {
-      "src/*": ["./src/*"]
+      "*": ["node_modules/*"]
     }
   },
-  "lib": ["es2022"]
+  "lib": ["es2022"],
+  "include": ["src/**/*"]
 }

@@ -2,10 +2,10 @@
   "name": "rss_node_notifier",
   "version": "1.0.0",
   "description": "A lightweight NodeJS RSS notifier written in TypeScript",
-  "main": "dist/app.js",
+  "main": "dist/src/app.js",
   "type": "module",
   "scripts": {
-    "start": "tsc && node --env-file=.env dist/app.js",
+    "start": "tsc && node --env-file=.env dist/src/app.js",
     "test": "nyc mocha",
     "testy": "nyc mocha --recursive --exit --require source-map-support/register --require ts-node/register/transpile-only",
     "build": "tsc && npm run copy",
