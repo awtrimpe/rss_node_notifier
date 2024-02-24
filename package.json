@@ -6,8 +6,9 @@
   "type": "module",
   "scripts": {
     "start": "tsc && node --env-file=.env dist/src/app.js",
-    "test": "nyc mocha",
-    "testy": "nyc mocha --recursive --exit --require source-map-support/register --require ts-node/register/transpile-only",
+    "test": "mocha -recursive --exit --require source-map-support/register --require ts-node/register/transpile-only",
+    "test:coverage": "nyc npm run test",
+    "test:coverage:html": "nyc --reporter=lcov npm run test",
     "build": "tsc && npm run copy",
     "lint": "eslint . --ext .ts",
     "format": "prettier . --write",
