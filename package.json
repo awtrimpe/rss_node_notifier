@@ -13,7 +13,7 @@
     "format": "prettier . --write",
     "copy": "cp .env package.json package-lock.json etc/rss_node_notifier.service ./dist"
   },
-  "precommit": [
+  "pre-commit": [
     "format",
     "lint"
   ],
@@ -32,7 +32,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "mocha": "^10.3.0",
     "nyc": "^15.1.0",
-    "precommit": "^1.2.2",
+    "pre-commit": "^1.2.2",
     "prettier": "^3.2.5",
     "prettier-plugin-organize-imports": "^3.2.4",
     "sinon": "^17.0.1",
