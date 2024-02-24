@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { expect } from 'chai';
 import { describe } from 'mocha';
-import { assert, restore, spy, stub } from 'sinon';
+import { assert, restore, stub } from 'sinon';
 import { sendPush } from '../../src/services/notification';
 import { xlmJSON } from '../helpers/list';
 
@@ -13,8 +13,10 @@ describe('notification.ts', () => {
 
   describe('sendNotification()', () => {
     it('should send a POST to Pushover for single item in array', () => {
-      const postSpy = stub(axios, 'post').resolves({ data: {}});
-      const singleEntry = [JSON.parse(JSON.stringify(xlmJSON)).rss.channel.item[0]];
+      const postSpy = stub(axios, 'post').resolves({ data: {} });
+      const singleEntry = [
+        JSON.parse(JSON.stringify(xlmJSON)).rss.channel.item[0],
+      ];
       sendPush(singleEntry);
       expect(postSpy.calledOnce).to.be.true;
       assert.calledWith(postSpy, 'https://api.pushover.net/1/messages.json', {
@@ -28,7 +30,7 @@ describe('notification.ts', () => {
     });
 
     it('should send a POST to Pushover for multiple items in array', () => {
-      const postSpy = stub(axios, 'post').resolves({ data: {}});
+      const postSpy = stub(axios, 'post').resolves({ data: {} });
       sendPush(xlmJSON.rss.channel.item);
       expect(postSpy.called).to.be.true;
       expect(postSpy.callCount).to.equal(xlmJSON.rss.channel.item.length);
