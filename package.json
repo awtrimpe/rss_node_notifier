@@ -19,6 +19,7 @@
     "lint"
   ],
   "devDependencies": {
+    "@istanbuljs/esm-loader-hook": "^0.2.0",
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@types/chai": "^4.3.11",
     "@types/mocha": "^10.0.6",
