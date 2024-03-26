@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { XMLParser } from 'fast-xml-parser';
 import { rssFilter } from './services/filter';
+import { stringAny } from './services/formatting';
+import { log } from './services/logging';
 import { sendPush } from './services/notification';
 import { XMLYTSResp } from './types/main';
 
@@ -22,7 +24,7 @@ export function startLoop() {
         sendPush(rssFilter(result));
       })
       .catch((err) => {
-        console.log(err);
+        log(stringAny(err));
       });
   };
   getMovies();
@@ -35,6 +37,6 @@ export function startLoop() {
 try {
   startLoop();
 } catch (err) {
-  console.log(err);
+  log(stringAny(err));
   startLoop();
 }

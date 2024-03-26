@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { XMLYTSMovie } from '../types/main';
+import { stringAny } from './formatting';
+import { log } from './logging';
 
 /**
  * Will send a POST request to the Pushover API for each movie match found
@@ -17,11 +19,11 @@ export function sendPush(movieArr: XMLYTSMovie[]) {
       })
       .then((response) => {
         // handle success
-        console.log(response.data);
+        log(stringAny(response.data));
       })
       .catch((error) => {
         // handle error
-        console.log(error);
+        log(stringAny(error));
       });
   });
 }

@@ -1,14 +1,15 @@
 import axios from 'axios';
 import { expect } from 'chai';
 import { describe } from 'mocha';
-import { assert, restore, stub } from 'sinon';
+import { assert, restore, spy, stub } from 'sinon';
+import { utils as util } from '../../src/services/formatting';
+import { utils } from '../../src/services/logging';
 import { sendPush } from '../../src/services/notification';
 import { xlmJSON } from '../helpers/list';
 
 describe('notification.ts', () => {
-  beforeEach(() => {
+  afterEach(() => {
     restore();
-    stub(console, 'log');
   });
 
   describe('sendNotification()', () => {
@@ -34,6 +35,16 @@ describe('notification.ts', () => {
       sendPush(xlmJSON.rss.channel.item);
       expect(postSpy.called).to.be.true;
       expect(postSpy.callCount).to.equal(xlmJSON.rss.channel.item.length);
+    });
+
+    it('should call console with error', () => {
+      const logSpy = spy(utils, 'log');
+      const stringStub = stub(util, 'stringAny');
+      const msg = { error: 'Bad error' };
+      stub(axios, 'post').rejects(msg);
+      sendPush(xlmJSON.rss.channel.item);
+      expect(logSpy.calledOnce).to.be.true;
+      expect(stringStub.calledOnceWith(msg)).to.be.true;
     });
   });
 });
