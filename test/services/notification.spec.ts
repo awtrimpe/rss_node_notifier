@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { expect } from 'chai';
 import { describe } from 'mocha';
-import { assert, restore, spy, stub } from 'sinon';
+import { assert, restore, spy, stub, SinonSpy } from 'sinon';
 import { utils as util } from '../../src/services/formatting';
 import { utils } from '../../src/services/logging';
 import { sendPush } from '../../src/services/notification';

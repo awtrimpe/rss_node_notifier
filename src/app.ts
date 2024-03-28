@@ -36,7 +36,7 @@ export function startLoop() {
 
 try {
   startLoop();
-} catch (err) {
-  log(stringAny(err));
+} catch (err) { /* istanbul ignore next */
+  log(stringAny(err)); /* istanbul ignore next */
   startLoop();
 }

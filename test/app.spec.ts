@@ -9,7 +9,7 @@ import {
   useFakeTimers,
 } from 'sinon';
 import { startLoop } from '../src/app';
-import { utils } from '../src/services/logging';
+import * as logging from '../src/services/logging';
 import { xlmJSON } from './helpers/list';
 
 let clock: SinonFakeTimers;
@@ -17,6 +17,7 @@ let clock: SinonFakeTimers;
 describe('app.ts', () => {
   beforeEach(() => {
     clock = useFakeTimers();
+    spy(console, 'log');
   });
 
   afterEach(() => {
@@ -40,9 +41,10 @@ describe('app.ts', () => {
     });
 
     it('should call console with error message', () => {
-      const consoleSpy = spy(utils, 'log');
-      stub(axios, 'get').resolves('bad format');
+      const consoleSpy = spy(logging, 'log');
+      stub(axios, 'get').rejects('bad format');
       startLoop();
+      assert.calledOnce(consoleSpy);
       assert.calledWith(consoleSpy, 'bad error');
     });
   });
