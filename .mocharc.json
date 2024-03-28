@@ -3,7 +3,9 @@
   "spec": "test/**/*.ts",
   "require": ["ts-node/register", "source-map-support/register"],
   "node-option": [
+    "no-warnings",
     "experimental-specifier-resolution=node",
+    "loader=@istanbuljs/esm-loader-hook",
     "loader=ts-node/esm"
   ],
   "recursive": true

@@ -1,27 +1,3 @@
-export interface YTSResp {
-  title: string;
-  description: string;
-  link: string;
-  image: string;
-  category: any[];
-  items: YTSMovie[];
-}
-
-export interface YTSMovie {
-  title: string;
-  description: string;
-  link: string;
-  published: number;
-  created: number;
-  category: any[];
-  enclosures: {
-    url: string;
-    type: string;
-    length: string;
-  }[];
-  media: {};
-}
-
 export interface XMLYTSResp {
   '?xml': {
     version: string;
