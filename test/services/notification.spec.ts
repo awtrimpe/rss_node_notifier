@@ -1,18 +1,25 @@
 import axios from 'axios';
 import { expect } from 'chai';
 import { describe } from 'mocha';
-import { SinonSpy, assert, restore, spy, stub } from 'sinon';
+import { SinonFakeTimers, assert, restore, stub, useFakeTimers } from 'sinon';
 // import { utils as util } from '../../src/services/formatting';
 // import { utils } from '../../src/services/logging';
 import { sendPush } from '../../src/services/notification';
 import { xlmJSON } from '../helpers/list';
 
+let clock: SinonFakeTimers;
+
 describe('notification.ts', () => {
-  afterEach(() => {
-    restore();
+  beforeEach(() => {
+    clock = useFakeTimers();
   });
 
-  describe('sendNotification()', () => {
+  afterEach(() => {
+    restore();
+    clock.restore();
+  });
+
+  describe('sendPush()', () => {
     it('should send a POST to Pushover for single item in array', () => {
       const postSpy = stub(axios, 'post').resolves({ data: {} });
       const singleEntry = [
@@ -46,6 +53,17 @@ describe('notification.ts', () => {
       // assert.calledOnce(logSpy);
       // assert.calledOnceWithExactly(stringStub, msg);
       // TODO: Find way to spy on ES Module exports
+    });
+
+    it('should send a POST to Pushover for multiple items in array', async () => {
+      const postSpy = stub(axios, 'post').rejects('Failed');
+      try {
+        await sendPush([xlmJSON.rss.channel.item[0]]);
+      } catch (err) {
+        expect(postSpy.called).to.be.true;
+        clock.tick(300001);
+        expect(postSpy.callCount).to.equal(2);
+      }
     });
   });
 });
