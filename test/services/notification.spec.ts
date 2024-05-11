@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { expect } from 'chai';
 import { describe } from 'mocha';
-import { SinonFakeTimers, SinonSpy, assert, restore, spy, stub, useFakeTimers } from 'sinon';
+import { SinonFakeTimers, assert, restore, stub, useFakeTimers } from 'sinon';
 // import { utils as util } from '../../src/services/formatting';
 // import { utils } from '../../src/services/logging';
 import { sendPush } from '../../src/services/notification';
@@ -55,11 +55,11 @@ describe('notification.ts', () => {
       // TODO: Find way to spy on ES Module exports
     });
 
-    it('should send a POST to Pushover for multiple items in array', () => {
-      const postSpy = stub(axios, 'post').resolves({ data: {} });
-      sendPush([xlmJSON.rss.channel.item[0]]);
+    it('should send a POST to Pushover for multiple items in array', async () => {
+      const postSpy = stub(axios, 'post').rejects('Failed');
+      await sendPush([xlmJSON.rss.channel.item[0]]);
       expect(postSpy.called).to.be.true;
-      clock.tick(301000);
+      clock.tick(300001);
       expect(postSpy.callCount).to.equal(2);
     });
   });
