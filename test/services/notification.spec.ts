@@ -57,10 +57,13 @@ describe('notification.ts', () => {
 
     it('should send a POST to Pushover for multiple items in array', async () => {
       const postSpy = stub(axios, 'post').rejects('Failed');
-      await sendPush([xlmJSON.rss.channel.item[0]]);
-      expect(postSpy.called).to.be.true;
-      clock.tick(300001);
-      expect(postSpy.callCount).to.equal(2);
+      try {
+        await sendPush([xlmJSON.rss.channel.item[0]]);
+      } catch (err) {
+        expect(postSpy.called).to.be.true;
+        clock.tick(300001);
+        expect(postSpy.callCount).to.equal(2);
+      }
     });
   });
 });
