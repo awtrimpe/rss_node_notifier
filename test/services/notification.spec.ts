@@ -12,6 +12,7 @@ let clock: SinonFakeTimers;
 describe('notification.ts', () => {
   beforeEach(() => {
     clock = useFakeTimers();
+    stub(console, 'log');
   });
 
   afterEach(() => {

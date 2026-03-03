@@ -34,10 +34,12 @@ export function startLoop() {
   }, 3600000);
 }
 
-try {
-  startLoop();
-} catch (err) {
-  /* istanbul ignore next */
-  log(stringAny(err)); /* istanbul ignore next */
-  startLoop();
+/* istanbul ignore next */
+if (process.env.NODE_ENV !== 'TEST') {
+  try {
+    startLoop();
+  } catch (err) {
+    log(stringAny(err));
+    startLoop();
+  }
 }

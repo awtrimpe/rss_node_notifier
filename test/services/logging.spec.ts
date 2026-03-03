@@ -1,5 +1,5 @@
 import { describe } from 'mocha';
-import { SinonSpy, assert, spy, stub } from 'sinon';
+import { SinonSpy, assert, restore, stub } from 'sinon';
 import { utils } from '../../src/services/formatting';
 import { log } from '../../src/services/logging';
 
@@ -7,7 +7,11 @@ let stringSpy: SinonSpy;
 
 describe('logging.ts', () => {
   beforeEach(() => {
-    stringSpy = spy(console, 'log');
+    stringSpy = stub(console, 'log');
+  });
+
+  afterEach(() => {
+    restore();
   });
 
   describe('log()', () => {

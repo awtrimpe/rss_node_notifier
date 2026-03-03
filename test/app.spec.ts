@@ -1,13 +1,6 @@
 import axios from 'axios';
 import { afterEach, describe, it } from 'mocha';
-import {
-  SinonFakeTimers,
-  assert,
-  restore,
-  spy,
-  stub,
-  useFakeTimers,
-} from 'sinon';
+import { SinonFakeTimers, assert, restore, stub, useFakeTimers } from 'sinon';
 import { startLoop } from '../src/app';
 // import * as logging from '../src/services/logging';
 import { xlmJSON } from './helpers/list';
@@ -17,7 +10,7 @@ let clock: SinonFakeTimers;
 describe('app.ts', () => {
   beforeEach(() => {
     clock = useFakeTimers();
-    spy(console, 'log');
+    stub(console, 'log');
   });
 
   afterEach(() => {
