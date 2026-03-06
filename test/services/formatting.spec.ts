@@ -27,6 +27,9 @@ describe('formatting.ts', () => {
     });
 
     it('should handle functions', () => {
+      expect(stringAny(Function)).to.equal(
+        'function Function() { [native code] }',
+      );
       expect(stringAny(() => {})).to.equal('() => { }');
     });
 
